@@ -28,5 +28,10 @@ services:
         tags:
             - { name: overblog_graphql.mutation, alias: "TaskMutation" }
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+    UserMutation:
+        class: App\Infrastructure\GraphQL\Mutation\UserMutation
+        public: true
+        arguments:
+            $commandBus: '@command.bus'
+        tags:
+            - { name: overblog_graphql.mutation, alias: "UserMutation" }    # add more service definitions when explicit configuration is needed

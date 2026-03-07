@@ -8,3 +8,6 @@ Query:
             allTasks:
                 type: "[Task]"
                 resolve: "@=service('App\\Domain\\Task\\TaskRepositoryInterface').findAll()"
+            allUsers:
+                type: "[User]!"
+                resolve: "@=service('App\\Domain\\User\\UserRepositoryInterface').findAll()"

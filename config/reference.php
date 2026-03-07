@@ -1611,7 +1611,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     security?: SecurityConfig,
  *     monolog?: MonologConfig,
  *     overblog_graphql?: OverblogGraphqlConfig,
- *     overblog_graphiql?: OverblogGraphiqlConfig,
  *     "when@dev"?: array{
  *         imports?: ImportsConfig,
  *         parameters?: ParametersConfig,
@@ -1645,7 +1644,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         security?: SecurityConfig,
  *         monolog?: MonologConfig,
  *         overblog_graphql?: OverblogGraphqlConfig,
- *         overblog_graphiql?: OverblogGraphiqlConfig,
  *     },
  *     "when@test"?: array{
  *         imports?: ImportsConfig,
@@ -1662,7 +1660,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         security?: SecurityConfig,
  *         monolog?: MonologConfig,
  *         overblog_graphql?: OverblogGraphqlConfig,
- *         overblog_graphiql?: OverblogGraphiqlConfig,
  *     },
  *     ...<string, ExtensionType|array{ // extra keys must follow the when@%env% pattern or match an extension alias
  *         imports?: ImportsConfig,
