@@ -7,7 +7,7 @@ Query:
                 resolve: "ok"
             allTasks:
                 type: "[Task]"
-                resolve: "@=service('App\\Domain\\Task\\TaskRepositoryInterface').findAll()"
+                resolve: "@=service('task.repository').findAll()"
             allUsers:
                 type: "[User]!"
-                resolve: "@=service('App\\Domain\\User\\UserRepositoryInterface').findAll()"
+                resolve: "@=service('user.repository').findAll()"

@@ -39,3 +39,8 @@ services:
     user.repository:
         alias: 'App\Domain\User\UserRepositoryInterface'
         public: true
+
+    task.repository:
+        alias: 'App\Domain\Task\TaskRepositoryInterface'
+        public: true
+
