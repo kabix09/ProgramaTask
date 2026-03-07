@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\GraphQL\Mutation;
 
+use App\Application\Task\Command\ChangeTaskStatusCommand;
 use App\Application\Task\Command\CreateTaskCommand;
+use App\Domain\Task\Task;
 use App\Domain\Task\TaskRepositoryInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -28,5 +30,11 @@ class TaskMutation
 
         $tasks = $this->taskRepository->findAll();
         return end($tasks) ?: null;
+    }
+
+    public function changeStatus(string $id, string $status): ?Task
+    {
+        $this->commandBus->dispatch(new ChangeTaskStatusCommand($id, $status));
+        return $this->taskRepository->find($id);
     }
 }

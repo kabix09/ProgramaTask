@@ -13,3 +13,11 @@ Mutation:
             syncUsers:
                 type: "Boolean!"
                 resolve: "@=service('UserMutation').sync()"
+            changeTaskStatus:
+                type: "Task"
+                args:
+                    id:
+                        type: "String!"
+                    status:
+                        type: "String!"
+                resolve: "@=service('TaskMutation').changeStatus(args['id'], args['status'])"
