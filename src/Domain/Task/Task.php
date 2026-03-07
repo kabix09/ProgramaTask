@@ -69,9 +69,9 @@ class Task
         return $this->description;
     }
 
-    public function getStatus(): string
+    public function getStatus(): TaskStatus
     {
-        return $this->status->value;
+        return $this->status;
     }
 
     public function getUserId(): ?Uuid

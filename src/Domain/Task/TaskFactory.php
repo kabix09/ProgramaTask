@@ -10,7 +10,7 @@ class TaskFactory
 {
     public function create(string $title, string $description, ?string $userId = null): Task
     {
-        if (empty($title)) {
+        if (empty(trim($title))) {
             throw new \InvalidArgumentException("Task title cannot be empty.");
         }
 
