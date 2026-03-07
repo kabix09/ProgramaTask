@@ -19,5 +19,14 @@ services:
     App\:
         resource: '../src/'
 
+    TaskMutation:
+        class: App\Infrastructure\GraphQL\Mutation\TaskMutation
+        public: true
+        arguments:
+            $commandBus: '@command.bus'
+            $taskRepository: '@App\Domain\Task\TaskRepositoryInterface'
+        tags:
+            - { name: overblog_graphql.mutation, alias: "TaskMutation" }
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

@@ -1,0 +1,14 @@
+Task:
+    type: object
+    config:
+        description: "Reprezentuje zadanie w systemie"
+        fields:
+            id:
+                type: "String!"
+                resolve: "@=value.getId().toRfc4122()"
+            title:
+                type: "String!"
+            description:
+                type: "String!"
+            status:
+                type: "String!"

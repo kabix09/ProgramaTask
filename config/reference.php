@@ -1588,6 +1588,15 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         query_match?: scalar|Param|null, // Default: null
  *     },
  * }
+ * @psalm-type OverblogGraphiqlConfig = array{
+ *     endpoint_resolver?: scalar|Param|null, // Default: "Overblog\\GraphiQLBundle\\Config\\GraphQLEndpoint\\Helpers\\OverblogGraphQLBundleEndpointResolver"
+ *     template?: scalar|Param|null, // In case you need it's possible to replace GraphiQL twig template // Default: "@OverblogGraphiQL/GraphiQL/index.html.twig"
+ *     javascript_libraries?: array{
+ *         graphiql?: scalar|Param|null, // Default: "0.11"
+ *         react?: scalar|Param|null, // Default: "15.6"
+ *         fetch?: scalar|Param|null, // Default: "2.0"
+ *     },
+ * }
  * @psalm-type ConfigType = array{
  *     imports?: ImportsConfig,
  *     parameters?: ParametersConfig,
@@ -1602,6 +1611,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     security?: SecurityConfig,
  *     monolog?: MonologConfig,
  *     overblog_graphql?: OverblogGraphqlConfig,
+ *     overblog_graphiql?: OverblogGraphiqlConfig,
  *     "when@dev"?: array{
  *         imports?: ImportsConfig,
  *         parameters?: ParametersConfig,
@@ -1619,6 +1629,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         monolog?: MonologConfig,
  *         maker?: MakerConfig,
  *         overblog_graphql?: OverblogGraphqlConfig,
+ *         overblog_graphiql?: OverblogGraphiqlConfig,
  *     },
  *     "when@prod"?: array{
  *         imports?: ImportsConfig,
@@ -1634,6 +1645,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         security?: SecurityConfig,
  *         monolog?: MonologConfig,
  *         overblog_graphql?: OverblogGraphqlConfig,
+ *         overblog_graphiql?: OverblogGraphiqlConfig,
  *     },
  *     "when@test"?: array{
  *         imports?: ImportsConfig,
@@ -1650,6 +1662,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         security?: SecurityConfig,
  *         monolog?: MonologConfig,
  *         overblog_graphql?: OverblogGraphqlConfig,
+ *         overblog_graphiql?: OverblogGraphiqlConfig,
  *     },
  *     ...<string, ExtensionType|array{ // extra keys must follow the when@%env% pattern or match an extension alias
  *         imports?: ImportsConfig,

@@ -1,0 +1,12 @@
+Mutation:
+    type: object
+    config:
+        fields:
+            createTask:
+                type: "Task"
+                args:
+                    title:
+                        type: "String!"
+                    description:
+                        type: "String!"
+                resolve: "@=service('TaskMutation').create(args)"

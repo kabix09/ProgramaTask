@@ -1,0 +1,10 @@
+Query:
+    type: object
+    config:
+        fields:
+            healthCheck:
+                type: "String"
+                resolve: "ok"
+            allTasks:
+                type: "[Task]"
+                resolve: "@=service('App\\Domain\\Task\\TaskRepositoryInterface').findAll()"

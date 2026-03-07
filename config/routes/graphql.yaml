@@ -1,2 +1,10 @@
+# Endpoint dla samego API (POST)
 overblog_graphql_endpoint:
     resource: "@OverblogGraphQLBundle/Resources/config/routing/graphql.yml"
+    prefix: /graphql
+
+# Endpoint dla GraphiQL (Interfejs graficzny)
+overblog_graphiql_endpoint:
+    path: /graphiql
+    controller: Overblog\GraphiQLBundle\Controller\GraphiQLController::indexAction
+    methods: [GET]
