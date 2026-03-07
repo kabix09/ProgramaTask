@@ -9,6 +9,8 @@ Mutation:
                         type: "String!"
                     description:
                         type: "String!"
+                    userId:
+                        type: "String"
                 resolve: "@=service('TaskMutation').create(args)"
             syncUsers:
                 type: "Boolean!"

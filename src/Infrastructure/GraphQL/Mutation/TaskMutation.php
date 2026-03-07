@@ -10,7 +10,6 @@ use App\Domain\Task\Task;
 use App\Domain\Task\TaskRepositoryInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Symfony\Component\Messenger\MessageBusInterface;
-use Symfony\Component\Messenger\Stamp\HandledStamp;
 
 class TaskMutation
 {
@@ -23,7 +22,8 @@ class TaskMutation
     {
         $command = new CreateTaskCommand(
             $args['title'],
-            $args['description']
+            $args['description'],
+            $args['userId'] ?? null,
         );
 
         $envelope = $this->commandBus->dispatch($command);

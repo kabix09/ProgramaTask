@@ -8,12 +8,18 @@ use Symfony\Component\Uid\Uuid;
 
 class TaskFactory
 {
-    public function create(string $title, string $description): Task
+    public function create(string $title, string $description, ?string $userId = null): Task
     {
         if (empty($title)) {
             throw new \InvalidArgumentException("Task title cannot be empty.");
         }
 
-        return new Task(Uuid::v4(), $title, $description);
+        $task = new Task(Uuid::v4(), $title, $description);
+
+        if ($userId !== null) {
+            $task->assignUser(Uuid::fromString($userId));
+        }
+
+        return $task;
     }
 }

@@ -35,3 +35,7 @@ services:
             $commandBus: '@command.bus'
         tags:
             - { name: overblog_graphql.mutation, alias: "UserMutation" }    # add more service definitions when explicit configuration is needed
+
+    user.repository:
+        alias: 'App\Domain\User\UserRepositoryInterface'
+        public: true

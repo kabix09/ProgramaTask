@@ -28,6 +28,9 @@ class Task
     #[ORM\Column(length: 20)]
     private string $status;
 
+    #[ORM\Column(type: 'uuid', nullable: true)]
+    private ?Uuid $userId = null;
+
     public function __construct(Uuid $id, string $title, string $description)
     {
         $this->id = $id;
@@ -69,5 +72,15 @@ class Task
     public function getStatus(): string
     {
         return $this->status;
+    }
+
+    public function getUserId(): ?Uuid
+    {
+        return $this->userId;
+    }
+
+    public function assignUser(Uuid $userId): void
+    {
+        $this->userId = $userId;
     }
 }
