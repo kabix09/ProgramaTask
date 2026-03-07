@@ -25,8 +25,8 @@ class Task
     #[ORM\Column(type: 'text')]
     private string $description;
 
-    #[ORM\Column(length: 20)]
-    private string $status;
+    #[ORM\Column(type: 'string', length: 20, enumType: TaskStatus::class)]
+    private TaskStatus $status;
 
     #[ORM\Column(type: 'uuid', nullable: true)]
     private ?Uuid $userId = null;
@@ -36,12 +36,12 @@ class Task
         $this->id = $id;
         $this->title = $title;
         $this->description = $description;
-        $this->status = 'TO_DO';
+        $this->status = TaskStatus::TODO;
 
         $this->recordEvent(new TaskCreatedEvent($this->id->toRfc4122(), $title));
     }
 
-    public function changeStatus(string $newStatus): void
+    public function changeStatus(TaskStatus $newStatus): void
     {
         if ($this->status === $newStatus) {
             return;
@@ -52,8 +52,8 @@ class Task
 
         $this->recordEvent(new TaskStatusUpdatedEvent(
             $this->id->toRfc4122(),
-            $oldStatus,
-            $newStatus
+            $oldStatus->value,
+            $newStatus->value
         ));
     }
 
@@ -71,7 +71,7 @@ class Task
 
     public function getStatus(): string
     {
-        return $this->status;
+        return $this->status->value;
     }
 
     public function getUserId(): ?Uuid

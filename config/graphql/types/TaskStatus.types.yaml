@@ -1,0 +1,7 @@
+TaskStatus:
+    type: enum
+    config:
+        values:
+            TO_DO: { value: "TO_DO" }
+            DONE: { value: "DONE" }
+            IN_PROGRESS: { value: "IN_PROGRESS" }

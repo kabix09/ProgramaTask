@@ -8,6 +8,7 @@ use App\Application\Task\Command\ChangeTaskStatusCommand;
 use App\Application\Task\Command\CreateTaskCommand;
 use App\Domain\Task\Task;
 use App\Domain\Task\TaskRepositoryInterface;
+use App\Domain\Task\TaskStatus;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Symfony\Component\Messenger\MessageBusInterface;
 
@@ -34,7 +35,9 @@ class TaskMutation
 
     public function changeStatus(string $id, string $status): ?Task
     {
-        $this->commandBus->dispatch(new ChangeTaskStatusCommand($id, $status));
+        $enumStatus = TaskStatus::from($status);
+
+        $this->commandBus->dispatch(new ChangeTaskStatusCommand($id, $enumStatus));
         return $this->taskRepository->find($id);
     }
 }

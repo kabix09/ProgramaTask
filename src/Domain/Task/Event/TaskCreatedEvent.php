@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\Task\Event;
 
 use App\Domain\Common\Event\DomainEventInterface;
+use App\Domain\Task\TaskStatus;
 
 class TaskCreatedEvent implements DomainEventInterface
 {
@@ -23,7 +24,7 @@ class TaskCreatedEvent implements DomainEventInterface
     {
         return [
             'title' => $this->title,
-            'status' => 'TO_DO'
+            'status' => TaskStatus::TODO->value,
         ];
     }
 }

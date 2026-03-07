@@ -11,7 +11,7 @@ Task:
             description:
                 type: "String!"
             status:
-                type: "String!"
+                type: "TaskStatus!"
             user:
                 type: "User"
                 resolve: "@=value.getUserId() ? service('user.repository').find(value.getUserId().toRfc4122()) : null"
