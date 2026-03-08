@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block container %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 text-center">
+                <div class="position-relative py-5">
+                    <img src="https://programa.pl/file/images/logo_color.svg"
+                         style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.05; width: 80%; z-index: 0;"
+                         alt="Background Logo">
+
+                    <div class="position-relative" style="z-index: 1;">
+                        <h1 class="display-3 fw-bold mb-3" style="color: var(--programa-dark);">Hello!</h1>
+                        <p class="lead mb-5 text-secondary">
+                            Witaj w aplikacji do zarządzania zadaniami. <br>
+                            System został zbudowany w oparciu o <strong>Symfony 7</strong>, <strong>GraphQL</strong> oraz <strong>Event Sourcing</strong>.
+                        </p>
+
+                        <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
+                            <a href="{{ path('overblog_graphiql_endpoint') }}" class="btn btn-programa btn-lg">
+                                Otwórz GraphiQL (API)
+                            </a>
+                            <a href="https://programa.pl/pl" target="_blank" class="btn btn-outline-dark btn-lg">
+                                O firmie
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-5 row text-start">
+                    <div class="col-sm-4">
+                        <h5 class="fw-bold">GraphQL API</h5>
+                        <p class="small text-muted">Pełna dokumentacja i interfejs testowy dostępny przez GraphiQL.</p>
+                    </div>
+                    <div class="col-sm-4">
+                        <h5 class="fw-bold">Event Store</h5>
+                        <p class="small text-muted">Każda zmiana stanu (Task/User) jest logowana jako zdarzenie domenowe.</p>
+                    </div>
+                    <div class="col-sm-4">
+                        <h5 class="fw-bold">Docker Ready</h5>
+                        <p class="small text-muted">Środowisko w pełni odizolowane i gotowe do startu jedną komendą.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
