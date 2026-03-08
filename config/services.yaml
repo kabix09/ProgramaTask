@@ -35,7 +35,7 @@ services:
         arguments:
             $commandBus: '@command.bus'
         tags:
-            - { name: overblog_graphql.mutation, alias: "UserMutation" }    # add more service definitions when explicit configuration is needed
+            - { name: overblog_graphql.mutation, alias: "UserMutation" }
 
     user.repository:
         alias: 'App\Domain\User\UserRepositoryInterface'
@@ -45,3 +45,7 @@ services:
         alias: 'App\Domain\Task\TaskRepositoryInterface'
         public: true
 
+    App\Infrastructure\GraphQL\Resolver\:
+        resource: '../src/Infrastructure/GraphQL/Resolver'
+        tags: [ 'overblog_graphql.resolver' ]
+        public: true

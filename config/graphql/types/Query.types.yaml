@@ -6,8 +6,18 @@ Query:
                 type: "String"
                 resolve: "ok"
             allTasks:
-                type: "[Task]"
-                resolve: "@=service('task.repository').findAll()"
+                type: "[Task]!"
+                access: "@=isGranted('ROLE_ADMIN')"
+                resolve: "@=service('App\\\\Infrastructure\\\\GraphQL\\\\Resolver\\\\AdminTaskResolver').resolve()"
+            tasksByUser:
+                type: "[Task]!"
+                args:
+                    userId:
+                        type: "String!"
+                resolve: "@=service('App\\\\Infrastructure\\\\GraphQL\\\\Resolver\\\\UserTaskResolver').resolve(args)"
             allUsers:
                 type: "[User]!"
                 resolve: "@=service('user.repository').findAll()"
+            me:
+                type: "User"
+                resolve: "@=service('App\\\\Infrastructure\\\\GraphQL\\\\Resolver\\\\UserResolver').__invoke()"

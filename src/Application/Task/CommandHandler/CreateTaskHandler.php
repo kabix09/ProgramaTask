@@ -36,7 +36,7 @@ class CreateTaskHandler
         $task = $this->taskFactory->create(
             $command->title,
             $command->description,
-            $assignedUser,
+            $assignedUser ?? null,
         );
 
         $this->taskRepository->save($task);

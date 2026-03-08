@@ -17,4 +17,15 @@ class UserFactory
             $data['email']
         );
     }
+
+    public function createLocalUser(string $email, string $name, array $roles = ['ROLE_USER']): User
+    {
+        return new User(
+            Uuid::v4(),
+            0,
+            $name,
+            $email,
+            $roles
+        );
+    }
 }

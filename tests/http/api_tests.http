@@ -1,0 +1,87 @@
+### =================================================================
+### 1. LOGOWANIE (Pobranie tokena JWT)
+### =================================================================
+POST http://localhost:8080/api/login_check
+Content-Type: application/json
+
+{
+    "email": "test@example.com",
+    "password": "tajnehaslo123"
+}
+
+> {% client.global.set("auth_token", response.body.token); %}
+
+
+### =================================================================
+### 2. PROFIL UŻYTKOWNIKA (Test Resolvera "me")
+### =================================================================
+POST http://localhost:8080/api/graphql/
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+    "query": "query { me { email name externalId } }"
+}
+
+
+### =================================================================
+### 3. ZADANIA ADMINA (Test uprawnień ROLE_ADMIN)
+### =================================================================
+POST http://localhost:8080/api/graphql/
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+    "query": "query { allTasks { id title status user { email name } } }"
+}
+
+
+### =================================================================
+### 4. SYNCHRONIZACJA (Mutation - API Zewnętrzne)
+### =================================================================
+POST http://localhost:8080/api/graphql/
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+    "query": "mutation { syncUsers }"
+}
+
+
+### =================================================================
+### 5. TWORZENIE ZADANIA (Mutation)
+### =================================================================
+POST http://localhost:8080/api/graphql/
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+    "query": "mutation { createTask(title: \"Zadanie testowe PHPStorm\", description: \"Wysłane przez plik .http\") { id title status } }"
+}
+
+
+### =================================================================
+### 6. LISTA WSZYSTKICH ZADAŃ (Standardowe Query)
+### =================================================================
+POST http://localhost:8080/api/graphql/
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+    "query": "query { allTasks { id title status user { name } } }"
+}
+
+
+### =================================================================
+### 6. ZADANIA WSKAZANEGO UŻYTKOWNIKA
+### =================================================================
+POST http://localhost:8080/api/graphql/
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+  "query": "query GetTasksByUser($id: String!) { tasksByUser(userId: $id) { id title status } }",
+  "variables": {
+    "id": "{{target_user_uuid}}"
+  }
+}
