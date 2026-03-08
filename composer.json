@@ -86,6 +86,15 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
+        ],
+        "test": "vendor/bin/phpunit",
+        "phpstan": "vendor/bin/phpstan analyse --memory-limit=258M",
+        "phpcs": "vendor/bin/phpcs",
+        "phpcbf": "vendor/bin/phpcbf",
+        "check-all": [
+            "@phpstan",
+            "@phpcs",
+            "@test"
         ]
     },
     "conflict": {
@@ -99,7 +108,10 @@
     },
     "require-dev": {
         "overblog/graphiql-bundle": "*",
+        "phpstan/phpstan": "^2.1",
+        "phpstan/phpstan-doctrine": "^2.0",
         "phpunit/phpunit": "^11.5",
+        "squizlabs/php_codesniffer": "^4.0",
         "symfony/browser-kit": "7.4.*",
         "symfony/css-selector": "7.4.*",
         "symfony/debug-bundle": "7.4.*",
