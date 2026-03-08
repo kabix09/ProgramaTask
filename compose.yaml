@@ -13,6 +13,20 @@ services:
       database:
         condition: service_healthy
 
+  messenger-worker:
+    build: .
+    env_file:
+      - .env
+      - .env.local
+    environment:
+      DB_HOST: database
+    command: php bin/console messenger:consume events -vv
+    depends_on:
+      database:
+        condition: service_healthy
+    volumes:
+      - .:/var/www:rw
+
   database:
     image: postgres:${DB_SERVER_VERSION:-16}-alpine
     ports:

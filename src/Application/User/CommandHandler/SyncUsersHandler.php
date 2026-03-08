@@ -9,6 +9,7 @@ use App\Domain\User\UserFactory;
 use App\Domain\User\UserRepositoryInterface;
 use App\Infrastructure\ExternalApi\JsonPlaceholderClient;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 #[AsMessageHandler]
 class SyncUsersHandler
@@ -16,7 +17,8 @@ class SyncUsersHandler
     public function __construct(
         private JsonPlaceholderClient $apiClient,
         private UserFactory $userFactory,
-        private UserRepositoryInterface $userRepository
+        private UserRepositoryInterface $userRepository,
+        private MessageBusInterface $eventBus,
     ) {
     }
 
@@ -33,6 +35,10 @@ class SyncUsersHandler
 
             $user = $this->userFactory->createFromApi($userData);
             $this->userRepository->save($user);
+
+            foreach ($user->pullEvents() as $event) {
+                $this->eventBus->dispatch($event);
+            }
         }
     }
 }

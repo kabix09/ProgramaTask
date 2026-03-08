@@ -9,7 +9,7 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class JsonPlaceholderClient
 {
-    private const API_URL = 'https://jsonplaceholder.typicode.com/';
+    private const API_URL = 'https://jsonplaceholder.typicode.com/users';
 
     public function __construct(
         private HttpClientInterface $httpClient

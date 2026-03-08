@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Domain\User;
 
+use App\Domain\Common\AggregateRootTrait;
+use App\Domain\User\Event\UserCreatedEvent;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Uid\Uuid;
 
@@ -11,6 +13,8 @@ use Symfony\Component\Uid\Uuid;
 #[ORM\Table(name: 'users')]
 class User
 {
+    use AggregateRootTrait;
+
     #[ORM\Id, ORM\Column(type: 'uuid')]
     private Uuid $id;
 
@@ -29,6 +33,11 @@ class User
         $this->externalId = $externalId;
         $this->name = $name;
         $this->email = $email;
+
+        $this->recordEvent(new UserCreatedEvent(
+            $this->id->toRfc4122(),
+            $this->email
+        ));
     }
 
     public function getId(): Uuid
