@@ -17,9 +17,9 @@ class TaskTest extends TestCase
         $task = new Task(Uuid::v4(), "Title", "Desc");
         $task->pullEvents();
 
-        $task->changeStatus(TaskStatus::DONE);
+        $task->changeStatus(TaskStatus::IN_PROGRESS);
 
-        $this->assertEquals(TaskStatus::DONE, $task->getStatus());
+        $this->assertEquals(TaskStatus::IN_PROGRESS, $task->getStatus());
 
         $events = $task->pullEvents();
         $this->assertCount(1, $events);
@@ -27,7 +27,18 @@ class TaskTest extends TestCase
 
         $payload = $events[0]->getPayload();
         $this->assertEquals('TO_DO', $payload['old_status']);
-        $this->assertEquals('DONE', $payload['new_status']);
+        $this->assertEquals('IN_PROGRESS', $payload['new_status']);
+    }
+
+    public function testShouldNotAllowDirectTransitionFromTodoToDone(): void
+    {
+        $task = new Task(Uuid::v4(), "Title", "Desc");
+        $task->pullEvents();
+
+        $this->expectException(\DomainException::class);
+        $this->expectExceptionMessage('Cannot transition from TO_DO to DONE');
+
+        $task->changeStatus(TaskStatus::DONE);
     }
 
     public function testShouldNotRecordEventWhenStatusIsSame(): void

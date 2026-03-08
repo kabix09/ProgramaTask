@@ -6,15 +6,15 @@ namespace App\Domain\Task\Status;
 
 use App\Domain\Task\TaskStatus;
 
-class DoneStatusStrategy implements StatusValidationStrategyInterface
+class InProgressStatusStrategy implements StatusValidationStrategyInterface
 {
     public function canTransitionTo(string $currentStatus): bool
     {
-        return $currentStatus === TaskStatus::IN_PROGRESS->value;
+        return $currentStatus === TaskStatus::TODO->value;
     }
 
     public function getSupportedStatus(): string
     {
-        return TaskStatus::DONE->value;
+        return TaskStatus::IN_PROGRESS->value;
     }
 }

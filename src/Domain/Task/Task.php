@@ -47,6 +47,16 @@ class Task
             return;
         }
 
+        $strategy = $newStatus->getValidationStrategy();
+
+        if ($strategy !== null && !$strategy->canTransitionTo($this->status->value)) {
+            throw new \DomainException(sprintf(
+                'Cannot transition from %s to %s',
+                $this->status->value,
+                $newStatus->value
+            ));
+        }
+
         $oldStatus = $this->status;
         $this->status = $newStatus;
 
@@ -80,10 +90,5 @@ class Task
     public function getUserId(): ?Uuid
     {
         return $this->userId;
-    }
-
-    public function assignUser(Uuid $userId): void
-    {
-        $this->userId = $userId;
     }
 }
