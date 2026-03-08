@@ -20,7 +20,7 @@ class ChangeTaskStatusHandler
 
     public function __invoke(ChangeTaskStatusCommand $command): void
     {
-        /** @var Task $task */
+        /** @var Task|null $task */
         $task = $this->taskRepository->find($command->taskId);
 
         if (!$task) {

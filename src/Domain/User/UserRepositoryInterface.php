@@ -6,7 +6,7 @@ namespace App\Domain\User;
 
 interface UserRepositoryInterface
 {
-    /** @return User[] */
+    /** @return User|null */
     public function findByExternalId(int $externalId): ?User;
     public function save(User $user): void;
 }

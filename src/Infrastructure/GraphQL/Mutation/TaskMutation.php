@@ -19,7 +19,7 @@ class TaskMutation
         private TaskRepositoryInterface $taskRepository,
     ) {}
 
-    public function create(Argument $args)
+    public function create(Argument $args): ?Task
     {
         $command = new CreateTaskCommand(
             $args['title'],

@@ -8,5 +8,9 @@ interface DomainEventInterface
 {
     public function getAggregateId(): string;
     public function getOccurredAt(): \DateTimeImmutable;
+
+    /**
+     * @return array<string, mixed>
+     */
     public function getPayload(): array;
 }

@@ -16,6 +16,9 @@ trait AggregateRootTrait
         $this->recordedEvents[] = $event;
     }
 
+    /**
+     * @return array<int, DomainEventInterface>
+     */
     public function pullEvents(): array
     {
         $events = $this->recordedEvents;
