@@ -57,7 +57,10 @@ class Task
         ));
     }
 
-    public function getId(): Uuid { return $this->id; }
+    public function getId(): Uuid
+    {
+        return $this->id;
+    }
 
     public function getTitle(): string
     {

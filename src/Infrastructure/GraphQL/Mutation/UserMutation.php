@@ -11,7 +11,8 @@ class UserMutation
 {
     public function __construct(
         private MessageBusInterface $commandBus
-    ) {}
+    ) {
+    }
 
     public function sync(): bool
     {

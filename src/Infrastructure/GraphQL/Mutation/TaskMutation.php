@@ -17,7 +17,8 @@ class TaskMutation
     public function __construct(
         private MessageBusInterface $commandBus,
         private TaskRepositoryInterface $taskRepository,
-    ) {}
+    ) {
+    }
 
     public function create(Argument $args): ?Task
     {

@@ -14,7 +14,8 @@ class EventStoreHandler
 {
     public function __construct(
         private readonly EntityManagerInterface $entityManager
-    ) {}
+    ) {
+    }
 
     public function __invoke(DomainEventInterface $event): void
     {

@@ -16,7 +16,8 @@ class ChangeTaskStatusHandler
     public function __construct(
         private TaskRepositoryInterface $taskRepository,
         private MessageBusInterface $eventBus
-    ) {}
+    ) {
+    }
 
     public function __invoke(ChangeTaskStatusCommand $command): void
     {

@@ -17,7 +17,8 @@ class SyncUsersHandler
         private JsonPlaceholderClient $apiClient,
         private UserFactory $userFactory,
         private UserRepositoryInterface $userRepository
-    ) {}
+    ) {
+    }
 
     public function __invoke(SyncUsersCommand $command): void
     {

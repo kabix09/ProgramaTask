@@ -18,8 +18,14 @@ class TaskCreatedEvent implements DomainEventInterface
         $this->occurredAt = new \DateTimeImmutable();
     }
 
-    public function getAggregateId(): string { return $this->taskId; }
-    public function getOccurredAt(): \DateTimeImmutable { return $this->occurredAt; }
+    public function getAggregateId(): string
+    {
+        return $this->taskId;
+    }
+    public function getOccurredAt(): \DateTimeImmutable
+    {
+        return $this->occurredAt;
+    }
     public function getPayload(): array
     {
         return [
@@ -28,4 +34,3 @@ class TaskCreatedEvent implements DomainEventInterface
         ];
     }
 }
-

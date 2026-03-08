@@ -17,7 +17,8 @@ class CreateTaskHandler
         private readonly TaskRepositoryInterface $taskRepository,
         private readonly MessageBusInterface $eventBus,
         private readonly TaskFactory $taskFactory,
-    ) {}
+    ) {
+    }
 
     public function __invoke(CreateTaskCommand $command): void
     {

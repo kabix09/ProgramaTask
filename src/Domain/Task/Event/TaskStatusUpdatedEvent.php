@@ -18,9 +18,16 @@ class TaskStatusUpdatedEvent implements DomainEventInterface
         $this->occurredAt = new \DateTimeImmutable();
     }
 
-    public function getAggregateId(): string { return $this->taskId; }
-    public function getOccurredAt(): \DateTimeImmutable { return $this->occurredAt; }
-    public function getPayload(): array {
+    public function getAggregateId(): string
+    {
+        return $this->taskId;
+    }
+    public function getOccurredAt(): \DateTimeImmutable
+    {
+        return $this->occurredAt;
+    }
+    public function getPayload(): array
+    {
         return [
             'old_status' => $this->oldStatus,
             'new_status' => $this->newStatus
