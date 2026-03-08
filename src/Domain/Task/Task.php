@@ -7,6 +7,7 @@ namespace App\Domain\Task;
 use App\Domain\Common\AggregateRootTrait;
 use App\Domain\Task\Event\TaskCreatedEvent;
 use App\Domain\Task\Event\TaskStatusUpdatedEvent;
+use App\Domain\User\User;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Uid\Uuid;
 
@@ -28,14 +29,16 @@ class Task
     #[ORM\Column(type: 'string', length: 20, enumType: TaskStatus::class)]
     private TaskStatus $status;
 
-    #[ORM\Column(type: 'uuid', nullable: true)]
-    private ?Uuid $userId = null;
+    #[ORM\ManyToOne(targetEntity: User::class)]
+    #[ORM\JoinColumn(name: "user_id", referencedColumnName: "id", nullable: true)]
+    private ?User $user = null;
 
-    public function __construct(Uuid $id, string $title, string $description)
+    public function __construct(Uuid $id, string $title, string $description, ?User $assignedUser = null)
     {
         $this->id = $id;
         $this->title = $title;
         $this->description = $description;
+        $this->user = $assignedUser;
         $this->status = TaskStatus::TODO;
 
         $this->recordEvent(new TaskCreatedEvent($this->id->toRfc4122(), $title));
@@ -89,6 +92,6 @@ class Task
 
     public function getUserId(): ?Uuid
     {
-        return $this->userId;
+        return $this->user?->getId();
     }
 }
